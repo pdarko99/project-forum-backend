@@ -3,9 +3,12 @@ import mongoose from "mongoose";
 const forumSchema = mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  userId: { type: String, required: true},
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
-const User = mongoose.model("Forum", forumSchema);
+const Forum = mongoose.model("Forum", forumSchema);
 
-export default User;
+export default Forum;

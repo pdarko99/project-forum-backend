@@ -4,6 +4,8 @@ import cors from "cors";
 import path from "path";
 
 import userRouter from "./routes/auth/auth.route.js";
+import forumRouter from "./routes/forum/forum.route.js";
+
 
 const app = express();
 app.use(cors());
@@ -13,6 +15,6 @@ app.use("/images/", express.static(path.join("backend/images")));
 
 
 app.use("/api/user", userRouter);
-// app.use("/api/user", userRoutes);
+app.use("/api/forum", forumRouter);
 
 export default app;
