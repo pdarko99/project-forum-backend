@@ -1,8 +1,8 @@
+import debug from "debug";
+import http from "http";
 import app from "./app.js";
-import debug from 'debug';
 
-const myDebug = debug('node-angular');
-import http from "http"
+const myDebug = debug("node-angular");
 
 const normalizePort = (val) => {
   var port = parseInt(val, 10);
@@ -43,7 +43,7 @@ const onListening = () => {
   const addr = server.address();
   const bind = typeof port === "string" ? "pipe " + port : "port " + port;
   myDebug("Listening on " + bind);
-  console.log("listening")
+  console.log("listening");
 };
 
 const port = normalizePort(process.env.PORT || "3000");
