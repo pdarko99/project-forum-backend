@@ -1,9 +1,8 @@
-import User from "../../model/user.js";
 import jwt from "jsonwebtoken";
+import User from "../../model/user.js";
 import { comparePassword } from "./util.js";
 
 const userLogin = async (req, res) => {
-  console.log(req.body);
   try {
     const user = await User.findOne({ email: req.body.email });
 
@@ -27,11 +26,9 @@ const userLogin = async (req, res) => {
       token,
       expiresIn: 3600,
       userId: user._id,
-      firstName: user.firstName
-
+      firstName: user.firstName,
     });
   } catch (error) {
-    console.log(error);
     res.status(401).json({
       error: error,
       message: "Auth Failed",

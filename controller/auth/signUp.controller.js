@@ -1,9 +1,8 @@
-import User from "../../model/user.js";
 import jwt from "jsonwebtoken";
+import User from "../../model/user.js";
 import { hashPassword } from "./util.js";
 
 const createUser = async (req, res) => {
-  console.log(req.body);
   const user = { ...req.body };
 
   try {
@@ -22,11 +21,10 @@ const createUser = async (req, res) => {
       token,
       expiresIn: 3600,
       userId: userResponse._id,
-      firstName: userResponse.firstName
+      firstName: userResponse.firstName,
     });
   } catch (error) {
-    console.log(error.message, 'from message');
-    if(error.message.includes("E11000")){
+    if (error.message.includes("E11000")) {
       return res.status(401).json({ message: "Email already exists" });
     }
     res.status(500).json({
