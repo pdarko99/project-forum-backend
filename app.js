@@ -10,7 +10,8 @@ const app = express();
 app.use(cors());
 
 app.use(express.json());
-mongoose.connect(process.env.DB_URL).catch((err) => {
+mongoose.connect(process.env.DB_URL)
+.catch((err) => {
   console.error("Connection failed", err);
 });
 

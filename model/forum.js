@@ -7,6 +7,9 @@ const forumSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  schoolName:{ type: String, required: true },
+  facultyName:{ type: String, required: true},
+  departmentName:{ type: String, required: true}
 });
 
 const Forum = mongoose.model("Forum", forumSchema);
