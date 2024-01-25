@@ -5,6 +5,14 @@ const usersSchema = mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  admin: { type: Boolean, required: true, default: false },
+  forumField: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Forum",
+      required: false,
+    },
+  ],
 });
 
 const User = mongoose.model("User", usersSchema);
