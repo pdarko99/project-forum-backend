@@ -40,10 +40,9 @@ const createForum = async (req, res) => {
   }
 };
 
-const appendForumId = async () => {
-  let forumIdToBeAdded = req.forum.forumIdToBeAdded;
+const appendForumId = async (req, res) => {
+  let forumIdToBeAdded = req.body.forumId;
   try {
-    // Step 1: Retrieve the User Document
     const user = await User.findById(req.userData.userId);
 
     if (!user) return res.status(401).json({ message: "User not found" });
@@ -54,7 +53,6 @@ const appendForumId = async () => {
 
     res.status(200).json({
       message: "Successful",
-      link,
     });
   } catch (error) {
     res.status(401).json({
@@ -64,4 +62,24 @@ const appendForumId = async () => {
   }
 };
 
-export { appendForumId, createForum, getAllForums };
+const getForum = async (req, res) => {
+  try {
+    const user = await User.findById(req.userData.userId)
+      .populate("forumField")
+      .exec();
+
+    if (!user) return res.status(401).json({ message: "User not found" });
+    console.log(user.forumField, 'from hmmm')
+    res.status(200).json({
+      message: "Successful",
+      forums: user.forumField,
+    });
+  } catch (error) {
+    res.status(401).json({
+      error: error,
+      message: "Failed to retrieve forum",
+    });
+  }
+};
+
+export { appendForumId, createForum, getAllForums, getForum };

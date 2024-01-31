@@ -4,11 +4,14 @@ import { comparePassword } from "./util.js";
 
 const userLogin = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email })
+      .populate("forumField")
+      .exec();
 
     if (!user)
       return res.status(401).json({ message: "Email or password is wrong" });
 
+    console.log(user);
     const validPassword = await comparePassword(
       req.body.password,
       user.password
@@ -27,6 +30,7 @@ const userLogin = async (req, res) => {
       expiresIn: 3600,
       userId: user._id,
       firstName: user.firstName,
+      forum: user.forumField,
     });
   } catch (error) {
     res.status(401).json({
