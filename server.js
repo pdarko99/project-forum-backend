@@ -1,8 +1,11 @@
 import debug from "debug";
 import http from "http";
 import app from "./app.js";
+import { Server } from 'socket.io';
 
 const myDebug = debug("node-angular");
+
+
 
 const normalizePort = (val) => {
   var port = parseInt(val, 10);
@@ -49,6 +52,12 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
+const io = new Server(server);
+
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
