@@ -67,9 +67,7 @@ const getForum = async (req, res) => {
     const user = await User.findById(req.userData.userId)
       .populate("forumField")
       .exec();
-
     if (!user) return res.status(401).json({ message: "User not found" });
-    console.log(user.forumField, 'from hmmm')
     res.status(200).json({
       message: "Successful",
       forums: user.forumField,

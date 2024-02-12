@@ -11,7 +11,6 @@ const userLogin = async (req, res) => {
     if (!user)
       return res.status(401).json({ message: "Email or password is wrong" });
 
-    console.log(user);
     const validPassword = await comparePassword(
       req.body.password,
       user.password

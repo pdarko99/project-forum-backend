@@ -4,6 +4,7 @@ const isAuthorized = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, "token");
+    console.log(decodedToken, 'from decoded token');
     req.userData = { email: decodedToken.email, userId: decodedToken.userId };
     next();
   } catch (error) {
