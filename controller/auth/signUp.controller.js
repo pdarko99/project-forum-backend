@@ -9,10 +9,8 @@ const createUser = async (req, res) => {
     user.password = await hashPassword(user.password);
 
     const newUser = new User(user);
-    console.log(newUser, "from newUser");
 
     const userResponse = await newUser.save();
-    console.log(userResponse, "from userResponse");
 
     const token = jwt.sign(
       { email: user.email, userId: userResponse._id },

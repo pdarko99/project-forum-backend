@@ -7,7 +7,10 @@ import forumRouter from "./routes/forum/forum.route.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:4200",
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 mongoose.connect(process.env.DB_URL)

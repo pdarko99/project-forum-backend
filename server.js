@@ -52,12 +52,22 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
-const io = new Server(server);
+// const io = new Server(server,  cors: {
+//   origin: enviroment.url
+// });
+
+const io = new Server(server, {
+  cors: {
+      origin: "http://localhost:4200"
+  }
+});
+
 
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connecteda ');
 });
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
+
